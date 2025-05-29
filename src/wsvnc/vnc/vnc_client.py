@@ -400,7 +400,7 @@ class WSVNCClient:
                 ssl=self.ssl_context,
                 origin=self.origin,  # type: ignore
                 subprotocols=["binary"],  # type: ignore
-                extra_headers=self.extra_headers
+                extra_headers=self.extra_headers,
                 ping_interval=None,
                 max_size=2**25,
                 read_limit=2**25,
