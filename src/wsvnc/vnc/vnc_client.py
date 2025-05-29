@@ -32,12 +32,14 @@ class WSVNCClient:
         security_type: security_type_interface.SecurityTypeInterface = no_security.NoSecurity(),
         keep_screen_updated: bool = False,
         shared_flag: int = 1,
+        extra_headers: Optional[dict[str,str]] = None,
     ) -> None:
         self.ticket_url = ticket_url
         self.origin = origin
         self.security_type = security_type
         self.ssl_context = ssl_context
         self.shared_flag = shared_flag
+        self.extra_headers = extra_headers
         # event loop
         self._loop = asyncio.new_event_loop()
         # start the client
@@ -398,6 +400,7 @@ class WSVNCClient:
                 ssl=self.ssl_context,
                 origin=self.origin,  # type: ignore
                 subprotocols=["binary"],  # type: ignore
+                extra_headers=self.extra_headers
                 ping_interval=None,
                 max_size=2**25,
                 read_limit=2**25,
